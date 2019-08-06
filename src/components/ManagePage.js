@@ -7,24 +7,29 @@ class ManagePage extends React.Component {
 state = {
     allowDelete : true,
         name:"bacon"
-};
+}
    
 tvShowSelected = (e) => {
-    e.preventDefault();
+    // e.preventDefault()
     console.log("select")
-};
+}
 
 tvShowDeleted = (e) => {
-    e.preventDefault();
+    // e.preventDefault()
     console.log("delete")
-};
+}
+
+saveTVShow = (e) => {
+    // e.preventDefault()
+    console.log('save')
+}
     
     
         handleSubmit = (e) => {
             if(e) e.preventDefault();
-            const Movie = [this.title.value, this.rating.value, this.img.value];
-            console.log(Movie);
-        };
+            const Movie = [this.title.value, this.rating.value, this.img.value]
+            console.log(Movie)
+        }
 
 render() {
   return (
@@ -50,7 +55,7 @@ render() {
     <div className="form">
 <form onSubmit = {this.handleSubmit}>
         <h2 className="center">New/Edit Show</h2>
-<label for="title">Title</label>
+<label htmlFor="title">Title</label>
         <input 
         className="center" 
         type="text" 
@@ -59,7 +64,7 @@ render() {
         ref = {(element) => {this.title = element }}
         required/>
         
-<label for="Rating">Rating</label>
+<label htmlFor="Rating">Rating</label>
         <input  
         className="center" 
         type="text" 
@@ -68,7 +73,7 @@ render() {
         ref = {(element) => {this.rating = element }}
         required/>
 
-<label for="imgurl">Image URL</label>
+<label htmlFor="imgurl">Image URL</label>
         <input 
         className="center" 
         type="text" 
@@ -77,7 +82,7 @@ render() {
         ref = {(element) => {this.img = element }}
         required/>
 
-        <button className="center" type="Submit">Create/Update</button>
+        <button onClick={this.saveTVShow} className="center" type="Submit">Create/Update</button>
         </form>
     </div>
 </div>
