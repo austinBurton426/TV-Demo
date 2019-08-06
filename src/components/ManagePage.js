@@ -9,7 +9,15 @@ state = {
         name:"bacon"
 };
    
+tvShowSelected = (e) => {
+    e.preventDefault();
+    console.log("select")
+};
 
+tvShowDeleted = (e) => {
+    e.preventDefault();
+    console.log("delete")
+};
     
     
         handleSubmit = (e) => {
@@ -36,7 +44,7 @@ render() {
 <div className="shows">
         <h2>Shows</h2>
        
-                <TVshow name={this.state.name} allowDelete={this.state.allowDelete}/>
+                <TVshow  selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} name={this.state.name} allowDelete={this.state.allowDelete}/>
             
     </div>
     <div className="form">

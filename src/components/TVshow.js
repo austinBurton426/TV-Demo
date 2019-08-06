@@ -7,11 +7,12 @@ class TVshow extends React.Component {
     //     super(props);
     //   }
 
+    // handleOnClick()
 
 renderDelete() {
     if (this.props.allowDelete===true) {
         return (<div>
-            <button>Butoon</button>
+            <button  onClick={this.props.deleteHandler}>Butoon</button>
             </div>
         )
     }
@@ -20,7 +21,7 @@ renderDelete() {
     render() {
   return (
    <div>
-       <button>{this.props.name}</button>
+       <button  onClick={this.props.selectHandler}>{this.props.name}</button>
        {this.renderDelete()}
    </div>
   );
