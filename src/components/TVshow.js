@@ -12,7 +12,7 @@ class TVshow extends React.Component {
 renderDelete() {
     if (this.props.allowDelete===true) {
         return (<div>
-            <button  onClick={this.props.deleteHandler}>Butoon</button>
+            <button  onClick={this.props.deleteHandler}>DeleteButton</button>
             </div>
         )
     }

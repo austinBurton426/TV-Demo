@@ -1,95 +1,150 @@
-import React from 'react';
+import React from "react";
 import { Link } from "react-router-dom";
 import TVshow from "./TVshow";
 
 class ManagePage extends React.Component {
-    
-state = {
-    allowDelete : true,
-        name:"bacon"
-}
-   
-tvShowSelected = (e) => {
-    // e.preventDefault()
-    console.log("select")
-}
+  state = {
+    allowDelete: true,
 
-tvShowDeleted = (e) => {
-    // e.preventDefault()
-    console.log("delete")
-}
+    name: "",
+    title: "",
+    rating: "",
+    img: "",
+    show:{
+      name:"",
+      rating:"",
+      img:""
+    }
+  };
 
-saveTVShow = (e) => {
-    // e.preventDefault()
-    console.log('save')
-}
-    
-    
-        handleSubmit = (e) => {
-            if(e) e.preventDefault();
-            const Movie = [this.title.value, this.rating.value, this.img.value]
-            console.log(Movie)
-        }
+  // renderShows = (e) => {
+  //   console.log()
 
-render() {
-  return (
-    <div>
+  // }
+renderShows= () =>(
+  <TVshow
+  selectHandler={this.tvShowSelected}
+  deleteHandler={this.tvShowDeleted}
+  // name={this.state.name}
+  name={this.state.show.name}
+  allowDelete={this.state.allowDelete}
+/>
+)
+
+  tvShowSelected = e => {
+    // e.preventDefault()
+this.setState({name:this.state.show.name, rating:this.state.show.rating, img:this.state.show.img})
+    // console.log("select");
+  };
+
+  tvShowDeleted = e => {
+    // e.preventDefault()
+    let deleteShows ={name:"",rating:"",img:""}
+    this.setState({shows: deleteShows})
+    // console.log("delete");
+  };
+
+  saveTVShow = e => {
+    e.preventDefault()
+    let saveShows = {name:this.state.name, rating:this.state.rating, img:this.state.img}
+    this.setState({show: saveShows})// e.preventDefault()
+
+
+    // console.log("pushed data into show: object");
+  };
+
+  handleSubmit = e => {
+    if (e) e.preventDefault();
+    const Movie = [this.name, this.rating, this.img];
+    console.log(Movie);
+  };
+
+  render() {
+    return (
+      <div>
         CONTENT
         <div>
-        <Link to="/">
-          Manage{" "}
-        </Link>
+          <Link to="/">Manage </Link>
 
-        <Link to="/Preview">
-          Preview{" "}
-        </Link>
+          <Link to="/Preview">Preview </Link>
+        </div>
+        <div id="block">
+          <div className="shows">
+            <h2>Shows</h2>
+
+            {/* <TVshow
+              selectHandler={this.tvShowSelected}
+              deleteHandler={this.tvShowDeleted}
+              name={this.state.name}
+              allowDelete={this.state.allowDelete}
+            /> */}
+
+{this.renderShows()}
+
+            {/* {renderShows()} */}
+          </div>
+          <div className="form">
+            <form onSubmit={this.handleSubmit}>
+              <h2 className="center">New/Edit Show</h2>
+
+              <label htmlFor="name">Title</label>
+
+              <input
+                value={this.state.name}
+                onChange={(event)=>this.setState({ name: event.target.value})}
+                className="center"
+                type="text"
+                placeholder="Name"
+                name="name"
+                ref={element => {
+                  this.title = element;
+                }}
+                required
+              />
+
+              <label htmlFor="Rating">Rating</label>
+
+              <input
+                value={this.state.rating}
+                onChange={(event)=>this.setState({ rating: event.target.value})}
+                className="center"
+                type="text"
+                placeholder="PG, PG-13, R, etc."
+                name="Rating"
+                ref={element => {
+                  this.rating = element;
+                }}
+                required
+              />
+
+              <label htmlFor="img">Image URL</label>
+
+              <input
+                value={this.state.img}
+                onChange={(event)=>this.setState({ img: event.target.value})}
+                className="center"
+                type="text"
+                placeholder="Image URL"
+                name="img"
+                ref={element => {
+                  this.img = element;
+                }}
+                required
+              />
+
+              <button
+                onClick={this.saveTVShow}
+                className="center"
+                type="Submit"
+              >
+                Create/Update
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
-
-      <div id="block">
-<div className="shows">
-        <h2>Shows</h2>
-       
-                <TVshow  selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} name={this.state.name} allowDelete={this.state.allowDelete}/>
-            
-    </div>
-    <div className="form">
-<form onSubmit = {this.handleSubmit}>
-        <h2 className="center">New/Edit Show</h2>
-<label htmlFor="title">Title</label>
-        <input 
-        className="center" 
-        type="text" 
-        placeholder="Title" 
-        name="title" 
-        ref = {(element) => {this.title = element }}
-        required/>
-        
-<label htmlFor="Rating">Rating</label>
-        <input  
-        className="center" 
-        type="text" 
-        placeholder="PG, PG-13, R, etc." 
-        name="Rating" 
-        ref = {(element) => {this.rating = element }}
-        required/>
-
-<label htmlFor="imgurl">Image URL</label>
-        <input 
-        className="center" 
-        type="text" 
-        placeholder="Image URL" 
-        name="imgurl" 
-        ref = {(element) => {this.img = element }}
-        required/>
-
-        <button onClick={this.saveTVShow} className="center" type="Submit">Create/Update</button>
-        </form>
-    </div>
-</div>
-
-    </div>
-  );
-}
+    );
+  }
 }
 
 export default ManagePage;
