@@ -40,7 +40,8 @@ this.setState({name:this.state.show.name, rating:this.state.show.rating, img:thi
   tvShowDeleted = e => {
     // e.preventDefault()
     let deleteShows ={name:"",rating:"",img:""}
-    this.setState({shows: deleteShows})
+    this.setState({show: deleteShows})
+    // this.setState({name:"", rating:"", img:""})
     // console.log("delete");
   };
 
@@ -48,6 +49,8 @@ this.setState({name:this.state.show.name, rating:this.state.show.rating, img:thi
     e.preventDefault()
     let saveShows = {name:this.state.name, rating:this.state.rating, img:this.state.img}
     this.setState({show: saveShows})// e.preventDefault()
+    this.setState({name:"", rating:"", img:""})
+
 
 
     // console.log("pushed data into show: object");
