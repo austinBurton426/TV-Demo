@@ -1,9 +1,16 @@
 import React from 'react';
+import Proptypes from 'prop-types';
 
 
 
 class TVshow extends React.Component {
-
+    static propTypes = {
+        name: Proptypes.string.isRequired,
+        allowDelete: Proptypes.bool,
+        selectHandler: Proptypes.func.isRequired,
+        deleteHandler: Proptypes.func
+    };
+    
 renderDelete() {
     if (this.props.allowDelete===true) {
         return (<div>
