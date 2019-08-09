@@ -1,30 +1,26 @@
-import React from 'react';
+import React from "react";
 import { Link } from "react-router-dom";
-import TVshow from './TVshow';
-
+import TVshow from "./TVshow";
 
 function PreviewPage() {
   return (
     <div>
-        CONTENT
-        <div>
-        <Link to="/">
-          Manage{" "}
-        </Link>
+      <div className="head">
+        <Link className="page" to="/">Manage </Link>
 
-        <Link to="/Preview">
-          Preview{" "}
-        </Link>
+        <Link className="page" to="/Preview">Preview </Link>
       </div>
-
-      <div className="shows">
-        <h2>Shows</h2>
-        <TVshow/>
-    </div>
-<h1>[Show Name]</h1>
-<h1>[Rating]</h1>
-<div>[Show's image]</div>
-
+      <div className="flex">
+        <div className="shows ">
+          <h2>Shows</h2>
+          <TVshow />
+        </div>
+        <div>
+          <h1>[Show Name]</h1>
+          <h1>[Rating]</h1>
+          <div>[Show's image]</div>
+        </div>
+      </div>
     </div>
   );
 }

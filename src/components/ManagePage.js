@@ -10,10 +10,10 @@ class ManagePage extends React.Component {
     title: "",
     rating: "",
     img: "",
-    show:{
-      name:"",
-      rating:"",
-      img:""
+    show: {
+      name: "",
+      rating: "",
+      img: ""
     }
   };
 
@@ -21,37 +21,43 @@ class ManagePage extends React.Component {
   //   console.log()
 
   // }
-renderShows= () =>(
-  <TVshow
-  selectHandler={this.tvShowSelected}
-  deleteHandler={this.tvShowDeleted}
-  // name={this.state.name}
-  name={this.state.show.name}
-  allowDelete={this.state.allowDelete}
-/>
-)
+  renderShows = () => (
+    <TVshow
+      selectHandler={this.tvShowSelected}
+      deleteHandler={this.tvShowDeleted}
+      // name={this.state.name}
+      name={this.state.show.name}
+      allowDelete={this.state.allowDelete}
+    />
+  );
 
   tvShowSelected = e => {
     // e.preventDefault()
-this.setState({name:this.state.show.name, rating:this.state.show.rating, img:this.state.show.img})
+    this.setState({
+      name: this.state.show.name,
+      rating: this.state.show.rating,
+      img: this.state.show.img
+    });
     // console.log("select");
   };
 
   tvShowDeleted = e => {
     // e.preventDefault()
-    let deleteShows ={name:"",rating:"",img:""}
-    this.setState({show: deleteShows})
+    let deleteShows = { name: "", rating: "", img: "" };
+    this.setState({ show: deleteShows });
     // this.setState({name:"", rating:"", img:""})
     // console.log("delete");
   };
 
   saveTVShow = e => {
-    e.preventDefault()
-    let saveShows = {name:this.state.name, rating:this.state.rating, img:this.state.img}
-    this.setState({show: saveShows})// e.preventDefault()
-    this.setState({name:"", rating:"", img:""})
-
-
+    e.preventDefault();
+    let saveShows = {
+      name: this.state.name,
+      rating: this.state.rating,
+      img: this.state.img
+    };
+    this.setState({ show: saveShows }); // e.preventDefault()
+    this.setState({ name: "", rating: "", img: "" });
 
     // console.log("pushed data into show: object");
   };
@@ -65,85 +71,87 @@ this.setState({name:this.state.show.name, rating:this.state.show.rating, img:thi
   render() {
     return (
       <div>
-        CONTENT
-        <div>
-          <Link to="/">Manage </Link>
+        <div className="head">
+          <Link className="page" to="/">
+            Manage{" "}
+          </Link>
 
-          <Link to="/Preview">Preview </Link>
+          <Link className="page" to="/Preview">
+            Preview{" "}
+          </Link>
         </div>
-        <div id="block">
-          <div className="shows">
-            <h2>Shows</h2>
+        <div className="flex">
+          
+            <div className="shows">
+              <h2>Shows</h2>
 
-            {/* <TVshow
-              selectHandler={this.tvShowSelected}
-              deleteHandler={this.tvShowDeleted}
-              name={this.state.name}
-              allowDelete={this.state.allowDelete}
-            /> */}
+              {this.renderShows()}
 
-{this.renderShows()}
+              {/* {renderShows()} */}
+            </div>
+            <div className="form">
+              <form id="form" onSubmit={this.handleSubmit}>
+                <h2 className="center">New/Edit Show</h2>
 
-            {/* {renderShows()} */}
-          </div>
-          <div className="form">
-            <form onSubmit={this.handleSubmit}>
-              <h2 className="center">New/Edit Show</h2>
+                <label htmlFor="name">Title</label>
 
-              <label htmlFor="name">Title</label>
+                <input
+                  value={this.state.name}
+                  onChange={event =>
+                    this.setState({ name: event.target.value })
+                  }
+                  className="center"
+                  type="text"
+                  placeholder="Name"
+                  name="name"
+                  ref={element => {
+                    this.title = element;
+                  }}
+                  required
+                />
 
-              <input
-                value={this.state.name}
-                onChange={(event)=>this.setState({ name: event.target.value})}
-                className="center"
-                type="text"
-                placeholder="Name"
-                name="name"
-                ref={element => {
-                  this.title = element;
-                }}
-                required
-              />
+                <label htmlFor="Rating">Rating</label>
 
-              <label htmlFor="Rating">Rating</label>
+                <input
+                  value={this.state.rating}
+                  onChange={event =>
+                    this.setState({ rating: event.target.value })
+                  }
+                  className="center"
+                  type="text"
+                  placeholder="PG, PG-13, R, etc."
+                  name="Rating"
+                  ref={element => {
+                    this.rating = element;
+                  }}
+                  required
+                />
 
-              <input
-                value={this.state.rating}
-                onChange={(event)=>this.setState({ rating: event.target.value})}
-                className="center"
-                type="text"
-                placeholder="PG, PG-13, R, etc."
-                name="Rating"
-                ref={element => {
-                  this.rating = element;
-                }}
-                required
-              />
+                <label htmlFor="img">Image URL</label>
 
-              <label htmlFor="img">Image URL</label>
+                <input
+                  value={this.state.img}
+                  onChange={event => this.setState({ img: event.target.value })}
+                  className="center"
+                  type="text"
+                  placeholder="Image URL"
+                  name="img"
+                  ref={element => {
+                    this.img = element;
+                  }}
+                  required
+                />
 
-              <input
-                value={this.state.img}
-                onChange={(event)=>this.setState({ img: event.target.value})}
-                className="center"
-                type="text"
-                placeholder="Image URL"
-                name="img"
-                ref={element => {
-                  this.img = element;
-                }}
-                required
-              />
-
-              <button
-                onClick={this.saveTVShow}
-                className="center"
-                type="Submit"
-              >
-                Create/Update
-              </button>
-            </form>
-          </div>
+                <button
+                  onClick={this.saveTVShow}
+                  className="center"
+                  type="Submit"
+                >
+                  Create/Update
+                </button>
+              </form>
+            </div>
+          
         </div>
       </div>
     );
