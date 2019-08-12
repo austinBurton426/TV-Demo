@@ -1,20 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import TVshow from "./TVshow";
+import Proptypes from 'prop-types';
+
 
 class ManagePage extends React.Component {
+  static propTypes = {
+show: Proptypes.object.isRequired,
+tvShowDeleted : Proptypes.func.isRequired,
+saveTVShow : Proptypes.func.isRequired
+};
+ 
   state = {
     allowDelete: true,
-
+//remove "show prop from state"
     name: "",
     title: "",
     rating: "",
     img: "",
-    show: {
-      name: "",
-      rating: "",
-      img: ""
-    }
+    // show: {
+    //   name: "",
+    //   rating: "",
+    //   img: ""
+    // }
+    //copied State ={..} step 1 paste >> apps.js
   };
 
   // renderShows = (e) => {
@@ -26,17 +35,17 @@ class ManagePage extends React.Component {
       selectHandler={this.tvShowSelected}
       deleteHandler={this.tvShowDeleted}
       // name={this.state.name}
-      name={this.state.show.name}
-      allowDelete={this.state.allowDelete}
+      name={this.props.show.name}
+      allowDelete={this.props.allowDelete}
     />
   );
 
   tvShowSelected = e => {
     // e.preventDefault()
     this.setState({
-      name: this.state.show.name,
-      rating: this.state.show.rating,
-      img: this.state.show.img
+      name: this.props.show.name,
+      rating: this.props.show.rating,
+      img: this.props.show.img
     });
     // console.log("select");
   };
@@ -44,7 +53,7 @@ class ManagePage extends React.Component {
   tvShowDeleted = e => {
     // e.preventDefault()
     let deleteShows = { name: "", rating: "", img: "" };
-    this.setState({ show: deleteShows });
+    this.props.showDeleted({ show: deleteShows });
     // this.setState({name:"", rating:"", img:""})
     // console.log("delete");
   };
@@ -56,9 +65,11 @@ class ManagePage extends React.Component {
       rating: this.state.rating,
       img: this.state.img
     };
-    this.setState({ show: saveShows }); // e.preventDefault()
+    this.props.saveShow({ show: saveShows });
+// called saveshow()
+    this.setState({saveShows}); // e.preventDefault()
     this.setState({ name: "", rating: "", img: "" });
-
+//did the thing
     // console.log("pushed data into show: object");
   };
 
