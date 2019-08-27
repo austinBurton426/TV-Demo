@@ -1,7 +1,7 @@
 import React from "react";
 import Routing from "./components/Routing";
 import './components/App.css';
-
+import ManagePage from './components/ManagePage';
 
 class App extends React.Component {
 
@@ -28,22 +28,28 @@ class App extends React.Component {
   };
 //bullet 4 complete? 
   saveTVShow = (showToSave) => {
-    showToSave.preventDefault();
+    // showToSave.preventDefault();
     let saveShows = {
       name: showToSave.name,
       rating: showToSave.rating,
       img: showToSave.img
     };
     this.setState({ show: saveShows }); // e.preventDefault()
-    this.setState({ name: "", rating: "", img: "" });
 
     // console.log("pushed data into show: object");
   };
 
+renderManagePage =  () => {
+  return <ManagePage 
+  PassShow = {this.state.show}
+  PassDelete = {this.tvShowDeleted}
+  PassSave = {this.saveTVShow}/>
+}
+
 render() {
   return (
     <div className="App">
-      <Routing />
+      <Routing PassManage = {this.renderManagePage}/>
     </div>
   );
 }

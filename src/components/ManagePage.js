@@ -5,6 +5,10 @@ import Proptypes from 'prop-types';
 
 
 class ManagePage extends React.Component {
+  constructor(props){
+    super(props);
+    // this.props = props;
+  }
   static propTypes = {
 show: Proptypes.object.isRequired,
 tvShowDeleted : Proptypes.func.isRequired,
@@ -30,22 +34,22 @@ saveTVShow : Proptypes.func.isRequired
   //   console.log()
 
   // }
-  renderShows = () => (
+  renderShows = () => ( console.log(this.props),
     <TVshow
       selectHandler={this.tvShowSelected}
       deleteHandler={this.tvShowDeleted}
       // name={this.state.name}
-      name={this.props.show.name}
-      allowDelete={this.props.allowDelete}
+      name={this.props.PassShow.name}
+      allowDelete={this.state.allowDelete}
     />
   );
 
   tvShowSelected = e => {
     // e.preventDefault()
     this.setState({
-      name: this.props.show.name,
-      rating: this.props.show.rating,
-      img: this.props.show.img
+      name: this.props.PassShow.name,
+      rating: this.props.PassShow.rating,
+      img: this.props.PassShow.img
     });
     // console.log("select");
   };
@@ -53,25 +57,25 @@ saveTVShow : Proptypes.func.isRequired
   tvShowDeleted = e => {
     // e.preventDefault()
     let deleteShows = { name: "", rating: "", img: "" };
-    this.props.showDeleted({ show: deleteShows });
+    this.props.PassDelete({ show: deleteShows });
     // this.setState({name:"", rating:"", img:""})
     // console.log("delete");
   };
 
-  saveTVShow = e => {
-    e.preventDefault();
-    let saveShows = {
-      name: this.state.name,
-      rating: this.state.rating,
-      img: this.state.img
-    };
-    this.props.saveShow({ show: saveShows });
-// called saveshow()
-    this.setState({saveShows}); // e.preventDefault()
-    this.setState({ name: "", rating: "", img: "" });
-//did the thing
-    // console.log("pushed data into show: object");
-  };
+//   saveTVShow = e => {
+//     e.preventDefault();
+//     let saveShowss = {
+//       name: this.state.name,
+//       rating: this.state.rating,
+//       img: this.state.img
+//     };
+//     // this.saveShow({ show: saveShowss });
+// // called saveshow()
+//     this.setState(saveShowss); // e.preventDefault()
+//     this.setState({ name: "", rating: "", img: "" });
+// //did the thing
+//     // console.log("pushed data into show: object");
+//   };
 
   handleSubmit = e => {
     if (e) e.preventDefault();
@@ -154,7 +158,10 @@ saveTVShow : Proptypes.func.isRequired
                 />
 
                 <button
-                  onClick={this.saveTVShow}
+                  onClick={() => this.props.PassSave({
+                    name: this.state.name,
+                  rating: this.state.rating,
+                img: this.state.img})}
                   className="center"
                   type="Submit"
                 >
