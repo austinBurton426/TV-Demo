@@ -6,6 +6,7 @@ import PreviewPage from './components/PreviewPage';
 
 class App extends React.Component {
   state = {
+    tvShows:[],
     allowDelete: true,
     show: {
       name: "",
@@ -24,11 +25,15 @@ class App extends React.Component {
       img: showToSave.img
     };
     this.setState({ show: saveShows });
+    this.setState((prevState) => {
+      return {tvShows:[...prevState.tvShows, saveShows]}
+    });
   };
 
   renderManagePage = () => {
     return (
       <ManagePage
+      tvShows = {this.state.tvShows}
         PassShow={this.state.show}
         PassDelete={this.tvShowDeleted}
         PassSave={this.saveTVShow}

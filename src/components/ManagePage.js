@@ -8,6 +8,7 @@ class ManagePage extends React.Component {
     super(props);
   }
   static propTypes = {
+    tvShows: Proptypes.array.isRequired,
     show: Proptypes.object.isRequired,
     tvShowDeleted: Proptypes.func.isRequired,
     saveTVShow: Proptypes.func.isRequired
@@ -21,17 +22,30 @@ class ManagePage extends React.Component {
     img: ""
   };
 
-  renderShows = () => (
-    console.log(this.props),
-    (
-      <TVshow
-        selectHandler={this.tvShowSelected}
-        deleteHandler={this.tvShowDeleted}
-        name={this.props.PassShow.name}
-        allowDelete={this.state.allowDelete}
-      />
-    )
-  );
+//   renderShows = () => {
+//     let Brown = this.props.tvShows
+// for(let i = Brown.length; i = Brown.length; i++)
+// {Brown.push(<TVshow
+//     selectHandler={this.tvShowSelected}
+//     deleteHandler={this.tvShowDeleted}
+//     name={this.props.PassShow.name}
+//     allowDelete={this.state.allowDelete}
+//   />);
+//   console.log(Brown);
+// }
+// };
+
+renderShows = () => {
+  let addMovie = []
+  for(let i = 0; i < this.props.tvShows.length; i++){
+addMovie.push(<TVshow
+  selectHandler={this.tvShowSelected}
+  deleteHandler={this.tvShowDeleted}
+  name={this.props.tvShows[i].name}
+  allowDelete={this.state.allowDelete}
+/>)}
+return addMovie;
+};
 
   tvShowSelected = e => {
     this.setState({
